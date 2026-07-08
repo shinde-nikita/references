@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "https://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+
+        <!-- Database connection settings -->
+        <property name="hibernate.connection.driver_class">
+            org.postgresql.Driver
+        </property>
+
+        <property name="hibernate.connection.url">
+            jdbc:postgresql://localhost:5432/your_database_name
+        </property>
+
+        <property name="hibernate.connection.username">
+            your_username
+        </property>
+
+        <property name="hibernate.connection.password">
+            your_password
+        </property>
+
+
+        <!-- SQL dialect -->
+        <property name="hibernate.dialect">
+            org.hibernate.dialect.PostgreSQLDialect
+        </property>
+
+
+        <!-- Show SQL in console -->
+        <property name="hibernate.show_sql">
+            true
+        </property>
+
+        <!-- Format SQL output -->
+        <property name="hibernate.format_sql">
+            true
+        </property>
+
+
+        <!-- Schema management -->
+        <!-- Options: create, create-drop, update, validate, none -->
+        <property name="hibernate.hbm2ddl.auto">
+            update
+        </property>
+
+
+        <!-- Connection pool settings (optional) -->
+        <property name="hibernate.connection.pool_size">
+            10
+        </property>
+
+
+        <!-- Entity mappings -->
+        <mapping class="com.example.entity.Employee"/>
+
+    </session-factory>
+
+</hibernate-configuration>
