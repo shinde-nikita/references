@@ -1,0 +1,112 @@
+spring:
+  application:
+    name: demo-spring-boot-api
+
+  profiles:
+    default: dev
+
+  jackson:
+    time-zone: UTC
+    serialization:
+      write-dates-as-timestamps: false
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 20MB
+
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+
+  cache:
+    type: caffeine
+
+
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: /api
+
+  shutdown: graceful
+
+  compression:
+    enabled: true
+    mime-types:
+      - application/json
+      - text/html
+      - text/plain
+      - text/css
+      - application/javascript
+
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+
+  swagger-ui:
+    path: /swagger-ui.html
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+          - metrics
+          - prometheus
+
+  endpoint:
+    health:
+      show-details: when_authorized
+
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+
+info:
+  app:
+    name: ${spring.application.name}
+    version: 1.0.0
+
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+
+  pattern:
+    console: >
+      %d{yyyy-MM-dd HH:mm:ss}
+      [%thread]
+      %-5level
+      %logger{36}
+      -
+      %msg%n
+
+
+security:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration: ${JWT_EXPIRATION:86400000}
+
+
+external:
+  payment:
+    url: ${PAYMENT_API_URL}
+    key: ${PAYMENT_API_KEY}
+
+
+app:
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:3000}
+
+  api:
+    version: v1
